@@ -17,6 +17,8 @@ class CreateOauthTokensTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->text('access_token');
+            $table->bigInteger('expires_in');
+            $table->text('refresh_token');
             $table->timestamps();
         });
     }
