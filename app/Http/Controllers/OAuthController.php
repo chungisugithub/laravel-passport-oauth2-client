@@ -9,25 +9,27 @@ class OAuthController extends Controller
 {
     public function redirect() {
         $queries = http_build_query([
-            'client_id' => '5',
-            'redirect_uri'=> 'http://client.test/oauth/callback',
+            'client_id' => config('services.oauth_server.client_id'),
+            'redirect_uri'=> config('services.oauth_server.redirect'),
             'response_type' => 'code'
         ]);
-        return redirect('http://127.0.0.1:8000/oauth/authorize?'. $queries);
+        // dd(config('services.oauth_server.uri'));
+        return redirect(config('services.oauth_server.uri').'/oauth/authorize?'. $queries);
     }
     
     public function callback(Request $request) {
-        $response = Http::post('http://127.0.0.1:8000/oauth/token', [
+        // dd($request);
+        $response = Http::post(config('services.oauth_server.uri').'/oauth/token', [
             'grant_type'=>'authorization_code',
-            'client_id' => '5',
-            'client_secret' => 'gEOOk03B1Cad6HvUrfQD7YvtOIdCrdhFTSrpsHGn',
-            'redirect_uri'=> 'http://client.test/oauth/callback',
+            'client_id' => config('services.oauth_server.client_id'),
+            'client_secret' => config('services.oauth_server.client_secret'),
+            'redirect_uri'=> config('services.oauth_server.redirect'),
             'code' => $request->code
         ]);
         // dd($response);
 
         $response = $response->json();
-
+        // dd($response);
         $request->user()->token()->delete();
 
         $token = $request->user()->token()->create([
