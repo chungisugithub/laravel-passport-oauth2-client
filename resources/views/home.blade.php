@@ -14,7 +14,16 @@
                         </div>
                     @endif
 
-                    <a href="/oauth/redirect">Authorize from server</a>
+                    @if (!auth()->user()->token)
+                        <a href="/oauth/redirect">Authorize from server</a>
+                    @endif
+
+                    @foreach ($posts as $post)
+                        <div class="py-3 border-bottom">
+                            <h3>{{ $post['title'] }}</h3>
+                            <div>{{ $post['body'] }}</div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
