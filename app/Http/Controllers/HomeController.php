@@ -35,11 +35,11 @@ class HomeController extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . auth()->user()->token->access_token
-            ])->get(config('services.oauth_server.uri').'/api/user');
+            ])->get(config('services.oauth_server.uri').'/api/posts');
             // dd($response);
             //if ($response->status() === 200) {
-                $user = $response->json();
-                dd($user);
+                $posts = $response->json();
+                dd($posts);
             //}
         }
         
