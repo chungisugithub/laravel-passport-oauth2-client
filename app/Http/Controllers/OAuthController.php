@@ -51,6 +51,7 @@ class OAuthController extends Controller
                 'client_id' => config('services.oauth_server.client_id'),
                 'client_secret' => config('services.oauth_server.client_secret'),
                 'redirect_uri'=> config('services.oauth_server.redirect'),
+                'scope' => 'view-posts'
             ]);
             // dd($response);
     
