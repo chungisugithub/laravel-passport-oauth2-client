@@ -37,10 +37,10 @@ class HomeController extends Controller
                 'Authorization' => 'Bearer ' . auth()->user()->token->access_token
             ])->get(config('services.oauth_server.uri').'/api/posts');
             // dd($response);
-            // if ($response->status() === 200) {
+            if ($response->status() === 200) {
                 $posts = $response->json();
-                dd($posts);
-            // }
+                // dd($posts);
+            }
         }
         
         return view('home', [
