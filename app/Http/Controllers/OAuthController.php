@@ -12,7 +12,7 @@ class OAuthController extends Controller
             'client_id' => config('services.oauth_server.client_id'),
             'redirect_uri'=> config('services.oauth_server.redirect'),
             'response_type' => 'code',
-            'scope' => 'view-posts view-user'
+            'scope' => 'view-posts'
         ]);
         // dd(config('services.oauth_server.uri'));
         return redirect(config('services.oauth_server.uri').'/oauth/authorize?'. $queries);
