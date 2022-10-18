@@ -28,9 +28,9 @@ class HomeController extends Controller
 
         if (auth()->user()->token) {
 
-            if (auth()->user()->token->hasExpired()) {
-                return redirect('/oauth/refresh');
-            }
+            // if (auth()->user()->token->hasExpired()) {
+            //     return redirect('/oauth/refresh');
+            // }
 
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
