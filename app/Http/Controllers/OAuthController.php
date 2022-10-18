@@ -44,6 +44,27 @@ class OAuthController extends Controller
     }
 
     public function refresh(Request $request) {
-        dd('refresh');
+               // dd($request);
+               $response = Http::post(config('services.oauth_server.uri').'/oauth/token', [
+                'grant_type'=>'authorization_code',
+                'client_id' => config('services.oauth_server.client_id'),
+                'client_secret' => config('services.oauth_server.client_secret'),
+                'redirect_uri'=> config('services.oauth_server.redirect'),
+                'code' => $request->code
+            ]);
+            // dd($response);
+    
+            $response = $response->json();
+            // dd($response);
+            $request->user()->token()->delete();
+    
+            $token = $request->user()->token()->create([
+                'access_token' => $response['access_token'],
+                'expires_in' => $response['expires_in'],
+                'refresh_token' => $response['refresh_token']
+            ]);
+    
+            // dd($token);
+            return redirect('/home');
     }
 }
