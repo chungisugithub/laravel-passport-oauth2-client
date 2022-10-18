@@ -42,4 +42,8 @@ class OAuthController extends Controller
         // dd($token);
         return redirect('/home');
     }
+
+    public function refresh(Request $request) {
+        dd('refresh');
+    }
 }
