@@ -30,7 +30,7 @@ class OAuthController extends Controller
         // dd($response);
 
         $response = $response->json();
-        dd($response);
+        // dd($response);
         $request->user()->token()->delete();
 
         $token = $request->user()->token()->create([
