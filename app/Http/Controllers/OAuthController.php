@@ -47,6 +47,7 @@ class OAuthController extends Controller
                // dd($request);
                $response = Http::post(config('services.oauth_server.uri').'/oauth/token', [
                 'grant_type'=>'refresh_token',
+                'refresh_token'=> $request->user()->token->refresh_token,
                 'client_id' => config('services.oauth_server.client_id'),
                 'client_secret' => config('services.oauth_server.client_secret'),
                 'redirect_uri'=> config('services.oauth_server.redirect'),
